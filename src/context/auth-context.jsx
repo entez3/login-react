@@ -1,6 +1,5 @@
 import React, { useContext, useReducer } from "react";
 import { initalState, reducer } from "./Reducer";
-
 //*init context box
 const AuthStateContext = React.createContext()
 const AuthDisptachrContext = React.createContext()
