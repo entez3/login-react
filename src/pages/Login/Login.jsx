@@ -9,7 +9,7 @@ const fetchToken = async (username, password) => {
     {
       username,
       password
-    }).then(Response=>Response.data)
+    }).then(Response => Response.data)
 }
 const fetchTokenCurrentUserInfo = (token) => {
   return axios.get('http://localhost:3001/users/me', {
@@ -37,10 +37,22 @@ function Login() {
   }
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+
+      return () => {
+        setToken(token)
+      }
+    }
+  }, [])
+
+
+  useEffect(() => {
     if (token) {
       fetchTokenCurrentUserInfo(token)
         .then(({ success, data }) => {
           if (success) {
+            localStorage.setItem('token', token)
             dispatch({
               type: actionType.LOGIN_SUCCESS,
               payload: {
